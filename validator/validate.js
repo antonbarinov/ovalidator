@@ -6,7 +6,7 @@ function doValidateObject(schema, objToValidate, currentPath = '', isArrayKey = 
     // Check for unexpected fields
     if (!Array.isArray(objToValidate)) {
         for (const key in objToValidate) {
-            if (!objToValidate.hasOwnProperty(key)) continue;
+            if (objToValidate.hasOwnProperty !== undefined && !objToValidate.hasOwnProperty(key)) continue;
             if (schema[ key ] === undefined) {
                 const path = currentPath ? currentPath + '.' + key : key;
                 errors.push(`${path} is unexpected`);
@@ -15,7 +15,7 @@ function doValidateObject(schema, objToValidate, currentPath = '', isArrayKey = 
     }
 
     for (const key in schema) {
-        if (!schema.hasOwnProperty(key)) continue;
+        if (objToValidate.hasOwnProperty !== undefined && !schema.hasOwnProperty(key)) continue;
 
         const validator = schema[ key ];
 
