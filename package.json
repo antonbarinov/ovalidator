@@ -1,0 +1,25 @@
+{
+  "name": "@antonbarinov/ovalidator",
+  "version": "1.0.1",
+  "description": "Javascript objects validator",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {},
+  "author": {
+    "name": "Barinov Anton"
+  },
+  "keywords": [
+    "objects",
+    "validator"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antonbarinov/ovalidator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antonbarinov/ovalidator/issues"
+  },
+  "homepage": "https://github.com/antonbarinov/ovalidator"
+}
