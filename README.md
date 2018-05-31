@@ -1,0 +1,2 @@
+# ovalidator
+Javascript objects validator
