@@ -18,6 +18,11 @@ function addTypesFunction(func) {
     }
 }
 
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 /**
  * Check that value must be !== undefined
  * @param errMsg
@@ -135,6 +140,28 @@ Validator.prototype.min = function (minValue,
     const func = (value, object, key, objPathStr = '') => {
         if (value < minValue) {
             this.__errors.push(errMsg(objPathStr, minValue));
+        }
+    };
+
+    this.__functions.push(func);
+
+    return this;
+};
+
+/**
+ * Check that value must be email
+ * @param errMsg
+ * @returns {Validator}
+ */
+Validator.prototype.email = function (
+                                    // Error string function
+                                    errMsg = (objPathStr) => {
+                                        return `${objPathStr} must be email`;
+                                    })
+{
+    const func = (value, object, key, objPathStr = '') => {
+        if (!validateEmail(value)) {
+            this.__errors.push(errMsg(objPathStr));
         }
     };
 
