@@ -108,7 +108,11 @@ function doValidate(schema, objToValidate, currentPath = '') {
     }
 }
 
-
+/**
+ * @param schema
+ * @param objToValidate
+ * @returns {Array}
+ */
 function Validate(schema, objToValidate) {
     errors = [];
     validationObjLink = null;
