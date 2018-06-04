@@ -16,15 +16,20 @@ let objToValidate = {
     a: "ssd",
     b: 19,
     c: {
-        a: [1,444]
+        a: [1, 444]
     },
-    f: [1,2,3,4],
+    f: [1, 2, 3, 4],
     g: [],
     i: {
         j: 1,
         s: 2
     },
-    k: 'asd'
+    k: 'asd',
+    l: { a: 2 },
+    m: [
+        { a: 2 },
+        { a: 3 }
+    ]
 };
 
 // custom validation function
@@ -61,7 +66,9 @@ let schema = {
     h: new Validator().required(),
     i: {
         j: [new Validator().required().min(15)],
-    }
+    },
+    l: new Validator().typeObject(),
+    m: [new Validator().typeObject()]
 };
 
 
@@ -126,6 +133,7 @@ console.log(errors2);
 - `.typeInteger(errMsgFunction)` - field type must be integer.
 - `.typeFloat(errMsgFunction)` - field type must be float.
 - `.typeString(errMsgFunction)` - field type must be string.
+- `.typeObject(errMsgFunction)` - field type must be object with any structure inside.
 - `.regexp(regExp, errMsgFunction)` - field must be valid with regular expression.
 - `.customFunction(customFunc, errMsgFunction)` - `customFunc` function must return `true` if field value is valid.
 

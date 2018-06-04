@@ -100,6 +100,30 @@ Validator.prototype.typeFloat = function(
 };
 
 /**
+ * Check that value is object with any structure inside
+ * @param errMsg
+ * @returns {Validator}
+ */
+Validator.prototype.typeObject = function(
+    // Error string function
+    errMsg = (objPathStr) => {
+        return `${objPathStr} must be object`;
+    })
+{
+    const func = (value, object, key, objPathStr = '') => {
+        if (typeof value !== 'object' || Array.isArray(value)) {
+            this.__errors.push(errMsg(objPathStr));
+
+            return false;
+        }
+    };
+
+    addTypesFunction.call(this, func);
+
+    return this;
+};
+
+/**
  * Check that value is string
  * @param errMsg
  * @returns {Validator}

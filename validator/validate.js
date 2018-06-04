@@ -15,7 +15,7 @@ function doValidateObject(schema, objToValidate, currentPath = '', isArrayKey = 
     }
 
     for (const key in schema) {
-        if (objToValidate.hasOwnProperty !== undefined && !schema.hasOwnProperty(key)) continue;
+        if (schema.hasOwnProperty !== undefined && !schema.hasOwnProperty(key)) continue;
 
         const validator = schema[ key ];
 
