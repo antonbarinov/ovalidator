@@ -68,22 +68,31 @@ let schema = {
         j: [new Validator().required().min(15)],
     },
     l: new Validator().typeObject(),
-    m: [new Validator().typeObject()]
+    m: [new Validator().typeObject()],
+    n: new Validator().default('THIS IS DEFAULT VALUE')
 };
 
 
-
 const errors = Validate(schema, objToValidate);
+console.log('errors:');
 console.log(errors);
-console.log('\r\n\r\n\r\n');
+
+console.log('\r\n');
 
 // Validate empty object
 const errors2 = Validate(schema, {});
+console.log('errors2:');
 console.log(errors2);
+
+console.log('\r\n');
+
+console.log('objToValidate:');
+console.log(objToValidate);
 ```
 
 ### Output
 ```
+errors:
 [ 'k is unexpected',
   'a must be "aaa" or "aAa"',
   'c.a must be integer',
@@ -109,8 +118,7 @@ console.log(errors2);
   'i.j must be array' ]
 
 
-
-
+errors2:
 [ 'b is required',
   'c.b.a is required',
   'c.b.b.a is required',
@@ -122,6 +130,19 @@ console.log(errors2);
   'g is required',
   'h is required',
   'i.j must be array' ]
+
+
+objToValidate:
+{ a: 'ssd',
+  b: 19,
+  c: { a: [ 1, 444 ] },
+  f: [ 1, 2, 3, 4 ],
+  g: [],
+  i: { j: 1, s: 2 },
+  k: 'asd',
+  l: { a: 2 },
+  m: [ { a: 2 }, { a: 3 } ],
+  n: 'THIS IS DEFAULT VALUE' }
 ```
 
 ### API
@@ -130,6 +151,7 @@ console.log(errors2);
 - `.max(maxVal, errMsgFunction)` - maximum int or float value.
 - `.minLength(minVal, errMsgFunction)` - minimum string length.
 - `.maxLength(maxVal, errMsgFunction)` - maximum string length.
+- `.default(defaultValue)` - set `defaultValue` value if its undefined.
 - `.typeInteger(errMsgFunction)` - field type must be integer.
 - `.typeFloat(errMsgFunction)` - field type must be float.
 - `.typeString(errMsgFunction)` - field type must be string.

@@ -1,6 +1,7 @@
 function Validator() {
     this.__isValidator = true;
     this.__isRequired = false;
+    this.__default = undefined;
 
     this.__functions = [];
     this.__errors = [];
@@ -195,6 +196,17 @@ Validator.prototype.email = function (
 };
 
 /**
+ * Set default value if not passed
+ * @param value
+ * @returns {Validator}
+ */
+Validator.prototype.default = function (value) {
+    this.__default = value;
+
+    return this;
+};
+
+/**
  * Check that string length more than ${minValue}
  * @param minValue
  * @param errMsg
@@ -329,6 +341,11 @@ Validator.prototype.customFunction = function (customFunc,
  * @private
  */
 Validator.prototype.__validate = function (value, object, key, objPathStr) {
+    if (typeof object === 'object' && value === undefined && this.__default !== undefined) {
+        value = this.__default;
+        object[key] = value;
+    }
+
     if (value === undefined && !this.__isRequired) {
         const errors = JSON.parse(JSON.stringify(this.__errors));
         this.__errors = [];

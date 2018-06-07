@@ -111,13 +111,14 @@ function doValidate(schema, objToValidate, currentPath = '') {
 /**
  * @param schema
  * @param objToValidate
+ * @param
  * @returns {Array}
  */
-function Validate(schema, objToValidate) {
+function Validate(schema, objToValidate, currentPath = '') {
     errors = [];
     validationObjLink = null;
 
-    doValidate(schema, objToValidate);
+    doValidate(schema, objToValidate, currentPath);
 
     return errors;
 }
