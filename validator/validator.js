@@ -149,6 +149,30 @@ Validator.prototype.typeString = function(
 };
 
 /**
+ * Check that value is boolean
+ * @param errMsg
+ * @returns {Validator}
+ */
+Validator.prototype.typeBoolean = function(
+    // Error string function
+    errMsg = (objPathStr) => {
+        return `${objPathStr} must be boolean`;
+    })
+{
+    const func = (value, object, key, objPathStr = '') => {
+        if (typeof value !== 'boolean') {
+            this.__errors.push(errMsg(objPathStr));
+
+            return false;
+        }
+    };
+
+    addTypesFunction.call(this, func);
+
+    return this;
+};
+
+/**
  * Check that integer or float more than ${minValue}
  * @param minValue
  * @param errMsg
