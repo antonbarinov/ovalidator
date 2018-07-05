@@ -145,6 +145,12 @@ objToValidate:
   n: 'THIS IS DEFAULT VALUE' }
 ```
 
+### Validate function
+Validate(schema, objToValidate, allowUnexpectedFiends = false)
+- `schema` - validation schema
+- `objToValidate` - object to validate using validation schema
+- `allowUnexpectedFiends` - allow fields in objects that not described in validation schema (Default: `false`)
+
 ### API
 - `.required(errMsgFunction)` - field is required.
 - `.min(minVal, errMsgFunction)` - minimum int or float value.

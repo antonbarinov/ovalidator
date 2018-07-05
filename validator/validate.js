@@ -1,10 +1,11 @@
 let errors = [];
 let validationObjLink = null;
+let unexpectedFieldsAllowed = false;
 
 
 function doValidateObject(schema, objToValidate, currentPath = '', isArrayKey = false, arrayKey) {
     // Check for unexpected fields
-    if (!Array.isArray(objToValidate)) {
+    if (!unexpectedFieldsAllowed && !Array.isArray(objToValidate)) {
         for (const key in objToValidate) {
             if (objToValidate.hasOwnProperty !== undefined && !objToValidate.hasOwnProperty(key)) continue;
             if (schema[ key ] === undefined) {
@@ -111,14 +112,15 @@ function doValidate(schema, objToValidate, currentPath = '') {
 /**
  * @param schema
  * @param objToValidate
- * @param
+ * @param allowUnexpectedFiends
  * @returns {Array}
  */
-function Validate(schema, objToValidate, currentPath = '') {
+function Validate(schema, objToValidate, allowUnexpectedFiends = false) {
     errors = [];
     validationObjLink = null;
+    unexpectedFieldsAllowed = allowUnexpectedFiends;
 
-    doValidate(schema, objToValidate, currentPath);
+    doValidate(schema, objToValidate);
 
     return errors;
 }
